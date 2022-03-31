@@ -7,7 +7,7 @@ If the first method doesn't work for you, you can still install Julia, add Pluto
 ## Binder
 Simply go to http://pluto-on-binder.glitch.me/ and copy the permalink from any Pluto notebook (e.g. https://github.com/ReneSkukies/PlutoNotebooks/blob/cbff776cce5a80059feb6a485df5b9c62512219b/src/nb_unfold_introduction.jl ) into the text field and click the binder link.
 
-## Installing your own Julia
+## Using Julia and Pluto.jl
 First you need to either download the specific notebook file you want to use or clone/ download the entire repo.
 
 If Julia is not already installed on your computer go to https://julialang.org/downloads/ and download your respective version. Now just start and follow the wizard.

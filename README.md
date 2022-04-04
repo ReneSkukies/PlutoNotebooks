@@ -14,4 +14,4 @@ If Julia is not already installed on your computer go to https://julialang.org/d
 
 Next you want to open any command prompt (for Windows tap the windows key and type "cmd") and type "julia" into the command line. This should've started julia. Now type "]" to get to the package manager (the green "julia" text should be replaced by a blue version number) and type "add Pluto".
 
-After Pluto is installed hit backslash to exit the package manager and execute the commands "using Pluto" and subsequently "Pluto.run()" to open a Pluto session in your default browser. From here you can paste the path to your desired notebook and start exploring.
+After Pluto is installed hit backslash to exit the package manager and execute the commands "using Pluto" and subsequently "Pluto.run()" to open a Pluto session in your default browser. From here you can paste the (absolut local) path to your desired notebook and start exploring.

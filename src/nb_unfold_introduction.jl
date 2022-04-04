@@ -48,17 +48,36 @@ md"""
 
 # ╔═╡ 18bfbf75-5e8d-4bbf-880f-589cbac1999e
 md"""
-This tutorial is meant as an easy introduction to using the Unfold toolbox/ package. It is written as a Pluto notebook so you don't have to worry about coding anything yourself and get a basic understanding of Unfold and the underlying method.
+This tutorial is meant as an easy introduction to using the Unfold toolbox/ package and how to correct for overlap. It is written as a Pluto notebook so you don't have to worry about coding anything yourself and get a basic understanding of Unfold and the underlying method.
 
-It is **not** meant to show you the full capabilities of Unfold. For this, please refer to the official [Julia](https://unfoldtoolbox.github.io/Unfold.jl/dev/) or [MATLAB](https://www.unfoldtoolbox.org/overview.html) documentation. Or read the [original Unfold paper](https://peerj.com/articles/7838/#p-28).
+It is **not** meant to show you the full capabilities of Unfold. For this, please refer to the official [Julia](https://unfoldtoolbox.github.io/Unfold.jl/dev/) or [MATLAB](https://www.unfoldtoolbox.org/overview.html) documentation. Additionally, you should read the [original Unfold paper](https://peerj.com/articles/7838/#p-28).
 
 If you are not familiar with Pluto, it is basically a Julia specific Jupyter notebook. With the noteable difference that variables are automatically shared and updated across all cells.
+
+Lastly, this Notebook is a work in progress and might change in the future. Any feedback is welcome.
 """
 
 # ╔═╡ 09beb045-a5d2-4472-8543-a95e6136e2a0
 md"""
 !!! note \"OBS!!!\" 
-	Occasionally, you will see blue "OBS" boxes. "OBS" is the norwegian word which combines the english words "note" and "attention". These boxes are meant to point out specific caveats which you should pay special attention to if you do your own analysis with Unfold in the future.
+	Occasionally, you will see blue "OBS" boxes. "OBS" is the norwegian word which combines the english words "note" and "attention". These boxes are meant to point out specific caveats which you should pay special attention when doing your own analysis with Unfold in the future.
+"""
+
+# ╔═╡ 1c69a368-8fe7-4fe2-8a94-562f06f38bfd
+md"""
+!!! warning \"Question\" 
+	You will also stumble upon such yellow "Question" boxes, which are meant to get you thinking. 
+"""
+
+# ╔═╡ f0d58bb0-f673-448d-851d-0adb718d5cfe
+md"""
+!!! tip \"Tips\" 
+	Green boxes are meant to give you tips for your own analysis, and might point you towards additional resources.
+"""
+
+# ╔═╡ 9697844d-3da2-4b3f-811b-eeb075b90fdd
+md"""
+Acknowledgement goes to Luis Lips for parts of the code.
 """
 
 # ╔═╡ 32303686-90db-4abb-ba87-57a58f93af1d
@@ -71,6 +90,12 @@ md"""
 # Simulating EEG
 
 To evaluate and show what Unfold can do we will use a trick from methods development research. In short we will simulate a response kernel multiple times to construct an artificial EEG signal with a known ground truth. 
+"""
+
+# ╔═╡ c84371c6-9bfb-4632-b641-43612d41023b
+md"""
+!!! warning \"Question\" 
+	Why do we simulate an EEG? Couldn't we just use some real EEG data?
 """
 
 # ╔═╡ 4c48a3ac-2fd2-4462-a655-559e69c4a18b
@@ -168,7 +193,7 @@ md"""
 
 # ╔═╡ 7e1eb3ae-829b-419b-8d7f-b08174419b19
 md"""
-Next, we will need event onsets for our kernels.
+Next, we will need event onsets for our kernels. The exact onsets in an EEG experiment depend on your setup. In our simulation, we can make life easy for us however, and just simulate 300 onsets for stimuli A and B respectively.
 
 We can either visualize these as onsets over time:
 """
@@ -258,7 +283,7 @@ In Julia this is rather trivial with the StatsModels package:
 
 
 !!! note \"OBS!!!\" 
-	Note that we are ommiting an intercept term. This is because of the way we set up our events table. We could also have coded the table in a different way; for more on this I recommend you to delve deeper into dummy/ contrast coding of regression model.
+	Note that we are ommiting an intercept term. This is because of the way we set up our events table. We could also have coded the table in a different way; for more on this I recommend you to delve deeper into dummy/ contrast coding of regression models.
 
 And finally, we can fit our model:
 ```julia
@@ -296,6 +321,12 @@ md"""
 # ╔═╡ 86855f65-4735-4dfd-a4ab-f4c6244d79fb
 md"""
 Looks like everything worked and we got our kernels back!
+"""
+
+# ╔═╡ ecd9e8ee-780e-4e7e-bfbd-724de8a57293
+md"""
+!!! warning \"Question\" 
+	All we did for now was to qualitatively show that the method works, how would we investigate this more systematically?
 """
 
 # ╔═╡ 1af20e94-4eaa-4a2c-886d-b556e3a36f7d
@@ -574,18 +605,24 @@ end
 
 # ╔═╡ aa6465bc-4c2c-4a4e-877d-cd54099c6135
 md"""
-!!! warning \"Oh no!!\" 
+!!! note \"OBS!!\" 
 
 	This doesn't look like our original response kernels anymore!!!
 """
 
 # ╔═╡ 5fa9df7b-557b-4ba8-af4f-d39f7b6135dc
 md"""
-Now what is happening here? For this we first need to understand that every recorded EEG signal is a convolution of a multitude of signals. Usually, additional signals convolve with our signal of interest at radom (i.e. seldom repeatedly) and we can classify this as noise. And simply by averaging over a multitude of trials we can get rid of such noise (which is why the "traditional" approach becase so popular).\
+Now what is happening here? For this we first need to understand that every recorded EEG signal is a convolution of a multitude of signals. Usually, additional signals convolve with our signal of interest at radom (i.e. seldom repeatedly) and we can classify this as noise. And simply by averaging over a multitude of trials we can get rid of such noise (which is why the "traditional" approach became so popular).\
 
 However, as soon as two signals are convolved repeatedly, either because Stimuli are presented too close together or because one event is dependent on another (e.g. a participants response), simply averaging doesn't help us getting rid of the influence the signals have on each other.\
 
 In the following you will now see why it makes sense to transition from simple averaging to a regression framework (and what powerful tools this gives us).
+"""
+
+# ╔═╡ ca9a9017-33ed-4b05-8140-ca8350698c95
+md"""
+!!! warning \"Question\" 
+	Can you think of specific experimental setups where overlap might pose a problem? 
 """
 
 # ╔═╡ 35dfc2e1-1653-498a-9b13-ec7038c82973
@@ -633,20 +670,21 @@ end
 # ╔═╡ 7648bb02-af27-4220-bb00-392696bbd0c1
 md"""
 ---
-As before, we are getting a tindy results table which we can use to plot our results.
+As before, we are getting a tindy results table which we can use to plot our results and compare them with the non overlap corrected approach.
 """
 
 # ╔═╡ 2a50c197-70dd-4fdc-957c-0e50718d0197
 begin
 	# condition A
 	condA = filter(row->row.coefname=="conditionA", results)
-	plot(condA.time, condA.estimate, ylims=(-5,5), linecolor=:orange, 
-		label="conditionA", legend=:outerbottom)
+	plot(condA.time, [condA.estimate condA_massU.estimate], layout = (2,1), ylims=(-5,5), linecolor=:orange, 
+		label="conditionA", legend=:outerbottom, title=["Overlap Corrected" "No Overlap Correction"])
 
 	# condition B
 	condB = filter(row->row.coefname=="conditionB", results)
-	plot!(condB.time, condB.estimate, ylims=(-5,5), linecolor=:deepskyblue, 
+	plot!(condB.time, [condB.estimate condB_massU.estimate], ylims=(-5,5), linecolor=:deepskyblue, 
 		label="conditionB")
+	plot!(size=(700,800))
 
 	vline!([0], linestyle=:dash, linecolor=:black, label="")
 end
@@ -2157,10 +2195,14 @@ version = "0.9.1+5"
 # ╟─ccd268ce-dfed-4dd2-8cc2-1d9a39c0e67d
 # ╟─18bfbf75-5e8d-4bbf-880f-589cbac1999e
 # ╟─09beb045-a5d2-4472-8543-a95e6136e2a0
+# ╟─1c69a368-8fe7-4fe2-8a94-562f06f38bfd
+# ╟─f0d58bb0-f673-448d-851d-0adb718d5cfe
+# ╟─9697844d-3da2-4b3f-811b-eeb075b90fdd
 # ╟─32303686-90db-4abb-ba87-57a58f93af1d
 # ╠═81ca9393-5d98-4d85-96fc-4725787aed18
 # ╟─31462217-1b12-4ea1-aea8-323045b2167e
 # ╟─d2633e8f-dd86-453b-ac83-61c8990f2723
+# ╟─c84371c6-9bfb-4632-b641-43612d41023b
 # ╟─4c48a3ac-2fd2-4462-a655-559e69c4a18b
 # ╟─1ae08d84-de51-439c-a580-4e65c45a1dc8
 # ╟─bf17e5d8-afcf-4537-a25f-0bc3c7389887
@@ -2203,6 +2245,7 @@ version = "0.9.1+5"
 # ╟─aa7b5e40-8a29-4e9a-9fd4-b584f027ffc4
 # ╠═087e6dcb-ab3a-41fb-ba31-43909b30e6d7
 # ╟─86855f65-4735-4dfd-a4ab-f4c6244d79fb
+# ╟─ecd9e8ee-780e-4e7e-bfbd-724de8a57293
 # ╟─1af20e94-4eaa-4a2c-886d-b556e3a36f7d
 # ╟─749a6ca6-2322-4df9-9355-d3f7b42cc760
 # ╟─b7ac9c1e-aabc-45c3-80b5-c85e5bd233ff
@@ -2216,9 +2259,10 @@ version = "0.9.1+5"
 # ╟─dd818514-b764-4651-a0e9-3b15c2b5748d
 # ╟─fe92f817-2c77-462b-8235-74c1462c297d
 # ╟─44a58bbd-4ec8-416a-9a4a-b0f39f96d3e8
-# ╟─f992532e-7360-47f7-810f-802a148f6571
+# ╠═f992532e-7360-47f7-810f-802a148f6571
 # ╟─aa6465bc-4c2c-4a4e-877d-cd54099c6135
 # ╟─5fa9df7b-557b-4ba8-af4f-d39f7b6135dc
+# ╟─ca9a9017-33ed-4b05-8140-ca8350698c95
 # ╟─35dfc2e1-1653-498a-9b13-ec7038c82973
 # ╟─993c86b0-d7cc-41ce-b60b-1e226b270c18
 # ╟─e2cb915c-a3a5-43ca-a807-54b6bd02f658

@@ -31,7 +31,7 @@ begin
 	# Table of contents; Depending on your screen size this one and/or the
 	# interactive slider box might be hidden. Feel free to comment out the
 	# toc and change line 5 to "top: 1rem;" in the next (hidden) cell.
-	PlutoUI.TableOfContents(aside=true, depth=1)
+	#PlutoUI.TableOfContents(aside=true, depth=1)
 	
 end
 
@@ -275,7 +275,7 @@ For Julia this means we end up with two variables:
 # ╔═╡ fdc2a51f-5c75-43ef-9384-0b6521072548
 md"""
 !!! tip \"Data Structure\" 
-	If you use Matlab you can find a handy cheat sheet here:
+	If you use Matlab you can find a handy cheat sheet here: [Unfold Cheatsheet](https://github.com/ReneSkukies/PlutoNotebooks/blob/main/assets/CheatSheet_draft.pdf)
 """
 
 # ╔═╡ 47f80bf2-7c90-4aeb-ac4c-1db2a812285f
@@ -433,7 +433,7 @@ begin
 	style = "
 		position: fixed;
 		right: 1rem;
-		top: 16rem;
+		top: 1rem;
 		width: 25%;
 		padding: 10px;
 		border: 3px solid rgba(0, 0, 0, 0.15);

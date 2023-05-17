@@ -42,6 +42,18 @@ md"""
 NOTE: This Notebook was written for an in-person workshop, thus some of the cells are intentionally left blank. Maybe I'll change this in the future...
 """
 
+# ╔═╡ 92dedb76-78f0-4870-a924-24a337c16644
+html"""
+<style>
+	main {
+		margin: 0 auto;
+		max-width: 3500px;
+    	padding-left: max(80px, 0%);
+    	padding-right: max(200px, 38%);
+	}
+</style>
+"""
+
 # ╔═╡ e4420b05-808e-49c8-b282-1d12853fc0ac
 md"""
 ## Packages
@@ -112,6 +124,27 @@ And now to one of Julia's strengths: Because of Julia's type system we can have 
 """
 
 # ╔═╡ 9b040a91-72b7-46c2-ba4a-e06aeeddf177
+
+
+# ╔═╡ 3e7c8dc7-2dd1-48f1-8f2b-e4fd42ee05db
+md"""
+# User defined types aka structs
+
+```julia
+struct MyStruct
+
+	Name::String
+	
+	Age::Int64
+
+end
+
+x = MyStruct("Name", Age)
+```
+
+"""
+
+# ╔═╡ e0256106-17a5-4c03-b16c-4446c0c9b8bf
 
 
 # ╔═╡ da28ebd6-e774-4d09-b122-21b968a01393
@@ -252,7 +285,7 @@ PLUTO_MANIFEST_TOML_CONTENTS = """
 
 julia_version = "1.8.3"
 manifest_format = "2.0"
-project_hash = "d97779905a812540bf127bfd2d7c4665862fccc4"
+project_hash = "8c4caece7585f1e66d2619b935cdea5aaa6e6542"
 
 [[deps.AbstractFFTs]]
 deps = ["ChainRulesCore", "LinearAlgebra"]
@@ -1737,6 +1770,7 @@ version = "3.5.0+0"
 # ╔═╡ Cell order:
 # ╟─9b190972-ed8e-11ed-27dd-bdc227ebd097
 # ╟─76fcde35-2674-4fbd-9b71-81faaae37b7e
+# ╟─92dedb76-78f0-4870-a924-24a337c16644
 # ╟─e4420b05-808e-49c8-b282-1d12853fc0ac
 # ╠═493c76e8-d515-47a1-b46e-df41924fc646
 # ╠═b515b03f-e3ad-4bcb-a002-5563f1f977c2
@@ -1751,6 +1785,8 @@ version = "3.5.0+0"
 # ╠═942aafb3-6e6a-4705-a4b5-c5191be06820
 # ╟─3a76d800-4885-4192-b896-3e2c40ba7e97
 # ╠═9b040a91-72b7-46c2-ba4a-e06aeeddf177
+# ╟─3e7c8dc7-2dd1-48f1-8f2b-e4fd42ee05db
+# ╠═e0256106-17a5-4c03-b16c-4446c0c9b8bf
 # ╟─da28ebd6-e774-4d09-b122-21b968a01393
 # ╟─8052a1a4-026a-4978-82d2-addc705ea54f
 # ╠═cb9201af-1b2c-409e-b89b-6029f2f7b252

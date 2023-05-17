@@ -93,13 +93,19 @@ Try it out for yourself in the next cell. 🐙
 
 # ╔═╡ 72260882-72bf-4ca8-a8a2-d44bdb26d355
 md"""
-# Booleans
+# Booleans & Operators
 """
+
+# ╔═╡ a07bfa7a-4edb-4792-ba8d-fb4e88443f5c
+
 
 # ╔═╡ 4d0950fe-794b-4a4b-8ae4-87a842b95071
 md"""
-## Loops and if's
+## Loops and If's
 """
+
+# ╔═╡ ae5bfb40-19df-40ed-a570-36d7f9975122
+
 
 # ╔═╡ 3626a8fb-c963-4863-8045-a9cb1a1e0341
 md"""
@@ -107,6 +113,8 @@ md"""
 
 This is a bit more advanced, but I highly recommend to get more into Julias type system once you got the basics down:
 [Type Documentation](https://docs.julialang.org/en/v1/manual/types/)
+
+Especially knowing the [type-hierachy](https://en.wikibooks.org/wiki/Introducing_Julia/Types#Type_hierarchy) can be useful to increase performance.
 """
 
 # ╔═╡ e396ab0a-99bf-4879-9e87-d43dca0b5fc2
@@ -126,6 +134,9 @@ And now to one of Julia's strengths: Because of Julia's type system we can have 
 # ╔═╡ 9b040a91-72b7-46c2-ba4a-e06aeeddf177
 
 
+# ╔═╡ e0256106-17a5-4c03-b16c-4446c0c9b8bf
+
+
 # ╔═╡ 3e7c8dc7-2dd1-48f1-8f2b-e4fd42ee05db
 md"""
 # User defined types aka structs
@@ -143,9 +154,6 @@ x = MyStruct("Name", Age)
 ```
 
 """
-
-# ╔═╡ e0256106-17a5-4c03-b16c-4446c0c9b8bf
-
 
 # ╔═╡ da28ebd6-e774-4d09-b122-21b968a01393
 md"""
@@ -1779,14 +1787,16 @@ version = "3.5.0+0"
 # ╟─28079a02-9772-415e-af5c-4920cb8571b6
 # ╠═7b023de3-9800-415b-a941-0f8789e9217d
 # ╟─72260882-72bf-4ca8-a8a2-d44bdb26d355
+# ╠═a07bfa7a-4edb-4792-ba8d-fb4e88443f5c
 # ╟─4d0950fe-794b-4a4b-8ae4-87a842b95071
+# ╠═ae5bfb40-19df-40ed-a570-36d7f9975122
 # ╟─3626a8fb-c963-4863-8045-a9cb1a1e0341
 # ╟─e396ab0a-99bf-4879-9e87-d43dca0b5fc2
 # ╠═942aafb3-6e6a-4705-a4b5-c5191be06820
 # ╟─3a76d800-4885-4192-b896-3e2c40ba7e97
 # ╠═9b040a91-72b7-46c2-ba4a-e06aeeddf177
-# ╟─3e7c8dc7-2dd1-48f1-8f2b-e4fd42ee05db
 # ╠═e0256106-17a5-4c03-b16c-4446c0c9b8bf
+# ╟─3e7c8dc7-2dd1-48f1-8f2b-e4fd42ee05db
 # ╟─da28ebd6-e774-4d09-b122-21b968a01393
 # ╟─8052a1a4-026a-4978-82d2-addc705ea54f
 # ╠═cb9201af-1b2c-409e-b89b-6029f2f7b252

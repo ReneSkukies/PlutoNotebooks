@@ -221,21 +221,26 @@ md"""
 And finally plot a fractal. Use the slider to increase number of points.
 """
 
+# ╔═╡ 4d69822b-05df-43f6-8a42-6f0e2fd50209
+@bind showFractal CheckBox(default=false)
+
 # ╔═╡ 2f56f22e-2acc-4b9d-b2ad-44f0be5896f6
 @bind npoints PlutoUI.Slider(20:20:1000, default=20)
 
 # ╔═╡ 971496e2-4d21-4df3-b031-6211df7def74
 begin
-#npoints = 600
-img = zeros(npoints, npoints)
-julia_set!(img, -1.7, 1.7, -1.7, 1.7, npoints)
-
-fig = Figure(figure_padding=0,resolution=(600,600))
-ax = Axis(fig[1,1]; aspect = DataAspect())
-heatmap!(ax, log10.(img); colormap=:bone_1)
-hidedecorations!(ax)
-hidespines!(ax)
-fig
+	if showFractal
+		#npoints = 600
+		img = zeros(npoints, npoints)
+		julia_set!(img, -1.7, 1.7, -1.7, 1.7, npoints)
+		
+		fig = Figure(figure_padding=0,resolution=(600,600))
+		ax = Axis(fig[1,1]; aspect = DataAspect())
+		heatmap!(ax, log10.(img); colormap=:bone_1)
+		hidedecorations!(ax)
+		hidespines!(ax)
+		fig
+	end
 end
 
 # ╔═╡ 79d26c3a-b7df-43d1-8d4e-b69af12c30e0
@@ -243,16 +248,25 @@ md"""
 ### Bonus: Algebra of Graphics
 """
 
+# ╔═╡ b707eb57-42f0-4281-b2a4-aa7aa83d5a8f
+begin
+	link = "https://raw.githubusercontent.com/jumpingrivers/datasauRus/main/inst/extdata/DatasaurusDozen-Long.tsv"
+	file = Downloads.download(link)
+	dsaurus = CSV.read(file, DataFrame, delim = '\t')
+end;
+
+# ╔═╡ dd58d7d2-48ac-4144-8177-7a7252cc82d2
+begin
+	@show unique(dsaurus.dataset)
+	dsaurus[1:5,:]
+end
+
 # ╔═╡ 233990b0-42e2-488e-857e-1d48728082ec
 @bind showDataSaurus CheckBox(default=false)
 
 # ╔═╡ 257b7d2e-62f4-40a9-9139-361e8b3827b0
 begin
 	if showDataSaurus
-	
-		link = "https://raw.githubusercontent.com/jumpingrivers/datasauRus/main/inst/extdata/DatasaurusDozen-Long.tsv"
-		file = Downloads.download(link)
-		dsaurus = CSV.read(file, DataFrame, delim = '\t')
 		
 		plt = data(dsaurus) * mapping(:x => "", :y => "", layout=:dataset)
 		with_theme(theme_light(), resolution = (1600,1200), fontsize = 24) do
@@ -1806,10 +1820,13 @@ version = "3.5.0+0"
 # ╟─a33389ad-2a1e-4d14-9025-707ca716af36
 # ╟─8e3f1100-e25b-442d-849f-ac735616b560
 # ╟─718565b1-c3d0-483d-99eb-dc829a1c6666
+# ╟─4d69822b-05df-43f6-8a42-6f0e2fd50209
 # ╟─2f56f22e-2acc-4b9d-b2ad-44f0be5896f6
 # ╠═971496e2-4d21-4df3-b031-6211df7def74
 # ╟─79d26c3a-b7df-43d1-8d4e-b69af12c30e0
 # ╠═9152b49f-c8f8-40ea-b8c7-704fb1c22535
+# ╠═b707eb57-42f0-4281-b2a4-aa7aa83d5a8f
+# ╠═dd58d7d2-48ac-4144-8177-7a7252cc82d2
 # ╟─233990b0-42e2-488e-857e-1d48728082ec
 # ╠═257b7d2e-62f4-40a9-9139-361e8b3827b0
 # ╟─00000000-0000-0000-0000-000000000001

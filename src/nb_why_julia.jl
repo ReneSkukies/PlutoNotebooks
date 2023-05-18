@@ -65,10 +65,10 @@ As an example let's load the XKCD package:
 """
 
 # ╔═╡ b515b03f-e3ad-4bcb-a002-5563f1f977c2
-@bind showComic CheckBox(default=false)
+md""" Click me to show a comic: $@bind showComic CheckBox(default=false)"""
 
 # ╔═╡ 9759a0fe-70cb-4b9d-9a3c-af3cb6abfa2b
-@bind NewComic PlutoUI.Button("Recompute")
+md""" I have no self control, show me another: $@bind NewComic PlutoUI.Button("Recompute")"""
 
 # ╔═╡ 3135f8b0-d5da-4755-aa77-92083e0d5489
 let 
@@ -222,10 +222,10 @@ And finally plot a fractal. Use the slider to increase number of points.
 """
 
 # ╔═╡ 4d69822b-05df-43f6-8a42-6f0e2fd50209
-@bind showFractal CheckBox(default=false)
+md""" Show me the fractal: $@bind showFractal CheckBox(default=false)"""
 
 # ╔═╡ 2f56f22e-2acc-4b9d-b2ad-44f0be5896f6
-@bind npoints PlutoUI.Slider(20:20:1000, default=20)
+md""" Make me sharper 👀: $@bind npoints PlutoUI.Slider(20:20:1000, default=20)"""
 
 # ╔═╡ 971496e2-4d21-4df3-b031-6211df7def74
 begin
@@ -262,7 +262,7 @@ begin
 end
 
 # ╔═╡ 233990b0-42e2-488e-857e-1d48728082ec
-@bind showDataSaurus CheckBox(default=false)
+md"""Learn about correlations: $@bind showDataSaurus CheckBox(default=false)"""
 
 # ╔═╡ 257b7d2e-62f4-40a9-9139-361e8b3827b0
 begin

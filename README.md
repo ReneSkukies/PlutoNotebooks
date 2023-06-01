@@ -5,6 +5,9 @@ The first one (using Binder) is easy, doesn't require you to set up anything and
 If this doesn't work for you, you can still install Julia, add Pluto.jl and run everything locally.
 
 ## Using Julia and Pluto.jl (recommended)
+
+**Update:** You can also just start Pluto the way it's explained further down and copy/paste the link to a specific notebook directly into Pluto's file prompt. Pluto will then automatically download the file into a temp folder and open it for you! No need to download anything from the repo anymore.
+
 First you need to either download the specific notebook file you want to use (from the src folder) or clone/ download the entire repo.
 
 If Julia is not already installed on your computer go to https://julialang.org/downloads/ and download your respective version. I used Julia Version 1.7.1, so every version past that should work as well. Now just start and follow the wizard.
